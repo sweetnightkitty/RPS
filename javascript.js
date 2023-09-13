@@ -1,4 +1,4 @@
-//Array used for RPS generation
+//Array used to feed options into the computer random choices
 const choice = ['Rock', 'Paper', 'Scissors'];
 
 //Generates Computer's RPS choice randomly
@@ -7,7 +7,17 @@ function getComputerChoice() {
  return(random, choice[random]);
 }
 
-//Single game of RPS
+//Automatically provides computer response to future functions
+const computerSelection = getComputerChoice();
+
+//Need to ask the user what their choice is, converted to lower case to make functions easy to write and avoid errors
+function getPlayerSelection() {
+    let playerSelection = prompt('Choose rock, scissors, or paper').toLowerCase();
+    return playerSelection;
+}
+
+
+/*Single game of RPS
 function playRound(playerSelection, computerSelection) {
     let player = playerSelection.toLowerCase();
     let rockWins = 'Rock beats scissors!';
@@ -22,21 +32,51 @@ function playRound(playerSelection, computerSelection) {
     : player == computerSelection.toLowerCase() ? 'Draw! Try again.'
     : 'error try again';
  }
+ */
 
-//Provides computer choice to playRound function
-const computerSelection = getComputerChoice();
+ //Single Round
+ function playRound(playerSelection, computerSelection) {
+    let result = playerSelection == 'rock' && computerSelection == 'Scissors' 
+    || playerSelection == 'paper' && computerSelection == 'Rock' 
+    || playerSelection == 'scissors' && computerSelection == 'Paper' ? 'You win!'
+    : playerSelection == computerSelection.toLowerCase() ? 'Draw! Try again.'
+    : 'You lose!';
+    
+    let winningChoice = result == 'You win!' ? playerSelection
+    : result == 'You lose!' ? computerSelection.toLowerCase()
+    : ''
+
+    let rule = winningChoice == 'rock' ? ' Rock beats scissors!'
+    : winningChoice == 'paper' ? ' Paper beats rock!'
+    : winningChoice == 'scissors' ? ' Scissors beats paper!'
+    : '';
+
+    return result + rule;
+
+ }
+
+
 
 //runs 5 rounds and logs how many wins out of total rounds.
 function game() {
-    let playerSelection = prompt('Choose rock, scissors, or paper');
-    let round1 = playRound
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(playRound(playerSelection, computerSelection));
+    let round1 = getPlayerSelection();
+    let comp1 = getComputerChoice();
+    console.log(playRound(round1, comp1));
+    let round2 = getPlayerSelection();
+    let comp2 = getComputerChoice();
+    console.log(playRound(round2, comp2));
+    let round3 = getPlayerSelection();
+    let comp3 = getComputerChoice();
+    console.log(playRound(round3, comp3));
+    let round4 = getPlayerSelection();
+    let comp4 = getComputerChoice();
+    console.log(playRound(round4, comp4));
+    let round5 = getPlayerSelection();
+    let comp5 = getComputerChoice();
+    console.log(playRound(round5, comp5));
 }
 
+game();
 
 
 
@@ -44,9 +84,9 @@ function game() {
 
 
 
+/*
 
-
-const playerSelection = 'rock';
+let playerSelection = prompt('Choose rock, scissors, or paper!');
 
 
 //ternary operator that determines if user win, lose, or draw
@@ -94,8 +134,10 @@ function fiveRound() {
     let round3 = console.log(showExpression());
     let round4 = console.log(showExpression());
     let round5 = console.log(showExpression());
-    
+
 
 }
 
 fiveRound();
+
+*/
