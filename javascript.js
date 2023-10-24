@@ -1,45 +1,47 @@
-//Array used to feed options into the computer random choices
-const choice = ['Rock', 'Paper', 'Scissors'];
+const choices = ['rock', 'paper', 'scissors'];
 
-//Generates Computer's RPS choice randomly
 function getComputerChoice() {
- const random = Math.floor(Math.random() * 3);
- return(random, choice[random]);
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 
-//Automatically provides computer response to future functions
-const computerSelection = getComputerChoice();
-
-//Need to ask the user what their choice is, converted to lower case to make functions easy to write and avoid errors
-function getPlayerSelection() {
-    let playerSelection = prompt('Choose rock, scissors, or paper').toLowerCase();
-    return playerSelection;
+function getPlayerChoice() {
+    input = prompt('Choose rock, scissors, or paper');
+    while (input == null) {
+        prompt('Choose rock, scissors, or paper');
+    }
+    input = input.toLowerCase();
+    let check = validateInput(input);
+    while (check == false){
+        input = prompt('Must type rock, scissors, or paper with no spelling mistakes');
+        input = input.toLowerCase();
+        check = validateInput(input);
+    }
+    return input;
 }
 
+function validateInput(input) {
+    return choices.includes(input)}
 
-/*Single game of RPS
-function playRound(playerSelection, computerSelection) {
-    let player = playerSelection.toLowerCase();
-    let rockWins = 'Rock beats scissors!';
-    let scissorsWins = 'Scissors beats paper!';
-    let paperWins = 'Paper beats rock';
-    return player == 'rock' && computerSelection == 'Scissors' ? 'You win! ' + rockWins
-    : player == 'rock' && computerSelection == 'Paper' ? 'You lose! ' + paperWins
-    : player == 'paper' && computerSelection == 'Rock' ? 'You win! ' + paperWins
-    : player == 'paper' && computerSelection == 'Scissors' ? 'You lose! ' + scissorsWins
-    : player == 'scissors' && computerSelection == 'Paper' ? 'You win! ' + scissorsWins
-    : player == 'scissors' && computerSelection == 'Rock' ? 'You lose! ' + rockWins
-    : player == computerSelection.toLowerCase() ? 'Draw! Try again.'
-    : 'error try again';
- }
- */
+function playRound() {
+    const playerSelection = getPlayerChoice();
+    const computerSelection = getComputerChoice();
+}
 
+playRound();
+
+
+
+
+
+/*
  //Single Round
  function playRound(playerSelection, computerSelection) {
-    let result = playerSelection == 'rock' && computerSelection == 'Scissors' 
-    || playerSelection == 'paper' && computerSelection == 'Rock' 
-    || playerSelection == 'scissors' && computerSelection == 'Paper' ? 'You win!'
-    : playerSelection == computerSelection.toLowerCase() ? 'Draw! Try again.'
+    //const playerSelection = getPlayerSelection();
+   // const computerSelection = getComputerChoice();
+    let result = playerSelection == 'rock' && computerSelection == 'scissors' 
+    || playerSelection == 'paper' && computerSelection == 'rock' 
+    || playerSelection == 'scissors' && computerSelection == 'paper' ? 'You win!'
+    : playerSelection == computerSelection ? 'Draw! Try again.'
     : 'You lose!';
     
     let winningChoice = result == 'You win!' ? playerSelection
@@ -52,11 +54,18 @@ function playRound(playerSelection, computerSelection) {
     : '';
 
     return result + rule;
-
  }
 
+function game(){
+    console.log(playRound(player, computer));
+    console.log(playRound(player, computer));
+    console.log(playRound(player, computer));
+    console.log(playRound(player, computer));
+    console.log(playRound(player, computer));
+}
 
-
+game();
+/*
 //runs 5 rounds and logs how many wins out of total rounds.
 function game() {
     let round1 = getPlayerSelection();
@@ -75,69 +84,5 @@ function game() {
     let comp5 = getComputerChoice();
     console.log(playRound(round5, comp5));
 }
-
-game();
-
-
-
-
-
-
-
-/*
-
-let playerSelection = prompt('Choose rock, scissors, or paper!');
-
-
-//ternary operator that determines if user win, lose, or draw
-function defineResult(playerSelection, computerSelection) {
-    let player = playerSelection.toLowerCase();
-    let result = player == 'rock' && computerSelection == 'Scissors' || player == 'scissors' && computerSelection == 'Paper' || player == 'paper' && computerSelection == 'Rock' ? 'win' 
-    : player == 'rock' && computerSelection == 'Paper' || player == 'paper' && computerSelection == 'Scissors' || player == 'scissors' && computerSelection == 'Rock' ? 'lose'
-    : 'draw';
-    return result;
-}
-const result = defineResult(playerSelection, computerSelection);
-
-//function defines what option won the game (Rock, Scissors or Paper) regardless of who won
-function defineWinningChoice() {
-    let winningChoice = result == 'win' ? playerSelection 
-    : result == 'lose' ? computerSelection
-    : '';
-    return winningChoice.toLowerCase();
-}
-
-const winningChoice = defineWinningChoice();
-
-//Creates a message for each winning option
-function getRule() {
-    return winningChoice == 'rock' ? 'Rock beats scissors!'
-    : winningChoice == 'paper' ? 'Paper beats rock!'
-    : winningChoice == 'scissors' ? 'Scissors beats paper!'
-    : winningChoice == ''? 'Try again.'
-    : 'error';
-}
-
-const rule = getRule();
-
-//Function that gets a message after the game
-function showExpression() {
-    return 'You ' + result + '! ' + rule;
-
-}
-
-//5 round game
-function fiveRound() {
-    let playerSelection = prompt('Choose rock, scissors, or paper');
-    let round1 = console.log(showExpression());
-    let round2 = console.log(showExpression());
-    let round3 = console.log(showExpression());
-    let round4 = console.log(showExpression());
-    let round5 = console.log(showExpression());
-
-
-}
-
-fiveRound();
 
 */
