@@ -25,16 +25,76 @@ function validateInput(input) {
 function playRound() {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
+    const winner = checkWinner(playerSelection, computerSelection);
+    const winningChoice = getWinningChoice(winner, playerSelection, computerSelection);
+    const rule = getRule(winner);
+    const message = getMessage(winningChoice);
+    //return message + rule!
+    
 }
+
+function getWinningChoice(winner, player, computer) {
+    if (winner === 'player'){
+        return player;
+    } else if (winner === 'computer'){
+        return computer;
+    } else {
+        return 'none';
+    }
+    }
+
+//outputs You win, you lose, or its a draw! - might need to add a space.
+function getMessage(winningChoice) {
+    if (winningChoice === 'rock'){
+
+    } else if (winningChoice === 'paper'){
+
+    } else if (winningChoice === 'scissors'){
+
+    } else {
+        return 'It\'s a draw!';
+    }
+}
+   /* if (winner === 'player') {
+        const message = 'You win! ';
+    } else if (winner === 'computer'){
+        const message = 'You lose! ';
+    } else {
+        const message = 'It\'s a draw!';
+    }
+    console.log(message + rule);
+}*/
 
 playRound();
 
+function checkWinner(player, computer){
+    if (player === computer) {
+        return 'draw';
+    } else if (
+        (player == 'rock' && computer == 'scissors') ||
+        (player == 'paper' && computer == 'rock') ||
+        (player == 'scissors' && computer == 'paper')) {
+            return 'player';
+        } else {
+            return 'computer';
+        }
+}
 
-
+function getRule(winner) {
+    if (winner === 'rock'){
+        return 'Rock beats scissors!';
+    } else if (winner === 'paper'){
+        return 'Paper beats rock!';
+    } else if (winner === 'scissors'){
+        return 'Scissors beats paper!';
+    } else {
+        return '';
+    }
+}
 
 
 /*
- //Single Round
+ //Single Round - my original method that worked with original 5 rounds.
  function playRound(playerSelection, computerSelection) {
     //const playerSelection = getPlayerSelection();
    // const computerSelection = getComputerChoice();
@@ -56,6 +116,8 @@ playRound();
     return result + rule;
  }
 
+
+//second attempt at 5 rounds to make more sense in line with the ODIN directions
 function game(){
     console.log(playRound(player, computer));
     console.log(playRound(player, computer));
@@ -65,6 +127,9 @@ function game(){
 }
 
 game();
+
+
+
 /*
 //runs 5 rounds and logs how many wins out of total rounds.
 function game() {
@@ -84,5 +149,7 @@ function game() {
     let comp5 = getComputerChoice();
     console.log(playRound(round5, comp5));
 }
+
+game();
 
 */
