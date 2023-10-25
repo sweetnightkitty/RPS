@@ -27,9 +27,9 @@ function playRound() {
     const computerSelection = getComputerChoice();
     const winner = checkWinner(playerSelection, computerSelection);
     const winningChoice = getWinningChoice(winner, playerSelection, computerSelection);
-    const rule = getRule(winner);
-    const message = getMessage(winningChoice);
-    //return message + rule!
+    const rule = getRule(winningChoice);
+    const message = getMessage(winner);
+    console.log(message + rule);
     
 }
 
@@ -39,33 +39,21 @@ function getWinningChoice(winner, player, computer) {
     } else if (winner === 'computer'){
         return computer;
     } else {
-        return 'none';
+        return '';
     }
     }
 
 //outputs You win, you lose, or its a draw! - might need to add a space.
-function getMessage(winningChoice) {
-    if (winningChoice === 'rock'){
-
-    } else if (winningChoice === 'paper'){
-
-    } else if (winningChoice === 'scissors'){
-
+function getMessage(winner) {
+    if (winner === 'player'){
+        return 'You win! ';
+    } else if (winner === 'computer'){
+        return 'You lose! ';
     } else {
         return 'It\'s a draw!';
-    }
-}
-   /* if (winner === 'player') {
-        const message = 'You win! ';
-    } else if (winner === 'computer'){
-        const message = 'You lose! ';
-    } else {
-        const message = 'It\'s a draw!';
-    }
-    console.log(message + rule);
-}*/
+    }}
 
-playRound();
+
 
 function checkWinner(player, computer){
     if (player === computer) {
@@ -80,12 +68,12 @@ function checkWinner(player, computer){
         }
 }
 
-function getRule(winner) {
-    if (winner === 'rock'){
+function getRule(winningChoice) {
+    if (winningChoice === 'rock'){
         return 'Rock beats scissors!';
-    } else if (winner === 'paper'){
+    } else if (winningChoice === 'paper'){
         return 'Paper beats rock!';
-    } else if (winner === 'scissors'){
+    } else if (winningChoice === 'scissors'){
         return 'Scissors beats paper!';
     } else {
         return '';
@@ -93,63 +81,13 @@ function getRule(winner) {
 }
 
 
-/*
- //Single Round - my original method that worked with original 5 rounds.
- function playRound(playerSelection, computerSelection) {
-    //const playerSelection = getPlayerSelection();
-   // const computerSelection = getComputerChoice();
-    let result = playerSelection == 'rock' && computerSelection == 'scissors' 
-    || playerSelection == 'paper' && computerSelection == 'rock' 
-    || playerSelection == 'scissors' && computerSelection == 'paper' ? 'You win!'
-    : playerSelection == computerSelection ? 'Draw! Try again.'
-    : 'You lose!';
-    
-    let winningChoice = result == 'You win!' ? playerSelection
-    : result == 'You lose!' ? computerSelection.toLowerCase()
-    : ''
 
-    let rule = winningChoice == 'rock' ? ' Rock beats scissors!'
-    : winningChoice == 'paper' ? ' Paper beats rock!'
-    : winningChoice == 'scissors' ? ' Scissors beats paper!'
-    : '';
-
-    return result + rule;
- }
-
-
-//second attempt at 5 rounds to make more sense in line with the ODIN directions
-function game(){
-    console.log(playRound(player, computer));
-    console.log(playRound(player, computer));
-    console.log(playRound(player, computer));
-    console.log(playRound(player, computer));
-    console.log(playRound(player, computer));
-}
-
-game();
-
-
-
-/*
-//runs 5 rounds and logs how many wins out of total rounds.
 function game() {
-    let round1 = getPlayerSelection();
-    let comp1 = getComputerChoice();
-    console.log(playRound(round1, comp1));
-    let round2 = getPlayerSelection();
-    let comp2 = getComputerChoice();
-    console.log(playRound(round2, comp2));
-    let round3 = getPlayerSelection();
-    let comp3 = getComputerChoice();
-    console.log(playRound(round3, comp3));
-    let round4 = getPlayerSelection();
-    let comp4 = getComputerChoice();
-    console.log(playRound(round4, comp4));
-    let round5 = getPlayerSelection();
-    let comp5 = getComputerChoice();
-    console.log(playRound(round5, comp5));
+    const roundOne = playRound();
+    const roundTwo = playRound();
+    const roundThree = playRound();
+    const roundFour = playRound();
+    const roundFive = playRound();
 }
 
 game();
-
-*/
