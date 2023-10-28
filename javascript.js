@@ -1,4 +1,6 @@
 const choices = ['rock', 'paper', 'scissors'];
+const winners = [];
+
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
@@ -22,7 +24,7 @@ function getPlayerChoice() {
 function validateInput(input) {
     return choices.includes(input)}
 
-function playRound(playerScore, computerScore) {
+function playRound() {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
 
@@ -30,12 +32,13 @@ function playRound(playerScore, computerScore) {
     const winningChoice = getWinningChoice(winner, playerSelection, computerSelection);
 
     const rule = getRule(winningChoice);
+
     const message = getMessage(winner);
     console.log(message + rule); // Ex) You lose! Rock beats paper!
-    
-    //const score = getScore(winner, playerScore, computerScore);
-    //console.log(score);
-    return [winner, playerScore, computerScore];
+
+    winners.push(winner);
+    let score = logScore();
+    console.log('Player: ' + score[0] + ' Computer: ' + score[1]);
 }
 
 function getWinningChoice(winner, player, computer) {
@@ -86,41 +89,36 @@ function getRule(winningChoice) {
     }
 }
 
-function getScore(winner, playerScore, computerScore) { //keeps score for each round, and logs when playRoun()
-    if (winner === 'player'){
-        playerScore++;
-    } else if (winner === 'computer'){
-        computerScore++;
-    } else {
-        //do nothing
-    }
-    return'Player: ' + playerScore + ' ' + 'Computer: ' + computerScore;
+function logScore() { //keeps score for each round, and logs when playRoun()
+    let playerWins = winners.filter((item) => item == 'player').length;
+    let computerWins = winners.filter((item) => item == 'computer').length;
+    let draws = winners.filter((item) => item == 'draw').length;
+    return [playerWins, computerWins];
 }
 
 
 
 function game() {
     for (i = 0; i < 6; i++) {
-        let playerScore = 0;
-        let computerScore = 0;
-        let round = playRound(playerScore, computerScore);
+        let round = playRound();
+    } 
+    
+    let winner = announceWinner();
+    console.log(winner);
 
-        let winner = round[0];
-        playerScore = round[1];
-        computerScore = round[2];
+}
 
-        let score = getScore(winner, playerScore, computerScore);
-        console.log(score);
-
-
-} //add code here to announce the winner when the for loop ends and rounds finish
+function announceWinner() {
+    const finalScore = logScore();
+    const playerFinal = finalScore[0];
+    const computerFinal = finalScore[1];
+    if (playerFinal > computerFinal) {
+        return 'Player Wins!';
+    } else if (playerFinal < computerFinal) {
+        return 'Computer Wins!';
+    } else {
+        return 'It\'s a draw!';
+    }
 }
 
 game();
-
-
-
-/*Need a loop that will:
-- play 1 round; print the message from playRound() AND update the computer / player score
-- Stops after 5 rounds
-- then announces winner*/
