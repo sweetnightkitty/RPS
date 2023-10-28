@@ -13,7 +13,7 @@ function getPlayerChoice() {
     }
     input = input.toLowerCase();
     let check = validateInput(input);
-    while (check == false){
+   while (check == false){
         input = prompt('Must type rock, scissors, or paper with no spelling mistakes');
         input = input.toLowerCase();
         check = validateInput(input);
@@ -24,8 +24,8 @@ function getPlayerChoice() {
 function validateInput(input) {
     return choices.includes(input)}
 
-function playRound() {
-    const playerSelection = getPlayerChoice();
+function playRound(playerSelection) {
+    //const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
 
     const winner = checkWinner(playerSelection, computerSelection);
@@ -39,6 +39,7 @@ function playRound() {
     winners.push(winner);
     let score = logScore();
     console.log('Player: ' + score[0] + ' Computer: ' + score[1]);
+    console.log(playerSelection);
 }
 
 function getWinningChoice(winner, player, computer) {
@@ -97,8 +98,8 @@ function logScore() { //keeps score for each round, and logs when playRoun()
 }
 
 
-
-function game() {
+//Plays 5 round game
+/*function game() {
     for (i = 0; i < 6; i++) {
         let round = playRound();
     } 
@@ -106,7 +107,7 @@ function game() {
     let winner = announceWinner();
     console.log(winner);
 
-}
+}*/
 
 function announceWinner() {
     const finalScore = logScore();
@@ -120,5 +121,17 @@ function announceWinner() {
         return 'It\'s a draw!';
     }
 }
+//playRound();
+//game();
 
-game();
+const buttons = document.querySelectorAll('.btn');
+console.log(buttons);
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerChoice = button.textContent.toLowerCase();
+        playRound(playerChoice);
+
+    })
+}
+)
