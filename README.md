@@ -18,3 +18,5 @@
     - Scissors Beats Paper!
 * case INsensitive (rock, Rock, ROCK)
 * return Function results (not log)
+
+
