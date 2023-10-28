@@ -1,11 +1,14 @@
 const choices = ['rock', 'paper', 'scissors'];
 const winners = [];
+const divResults = document.querySelector('.results')
+const buttons = document.querySelectorAll('.btn');
 
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
+//Formerly provided player choice to playRound() before RPS buttons were added to HTML
 function getPlayerChoice() {
     input = prompt('Choose rock, scissors, or paper');
     while (input == null) {
@@ -25,7 +28,7 @@ function validateInput(input) {
     return choices.includes(input)}
 
 function playRound(playerSelection) {
-    //const playerSelection = getPlayerChoice();
+    //const playerSelection = getPlayerChoice(); // Delete when the RPS buttons as input are finalized.
     const computerSelection = getComputerChoice();
 
     const winner = checkWinner(playerSelection, computerSelection);
@@ -34,12 +37,17 @@ function playRound(playerSelection) {
     const rule = getRule(winningChoice);
 
     const message = getMessage(winner);
-    console.log(message + rule); // Ex) You lose! Rock beats paper!
+    const roundResult = document.createTextNode(message + rule);
+    divResults.appendChild(roundResult);
+    // Ex) You lose! Rock beats paper!
 
     winners.push(winner);
     let score = logScore();
-    console.log('Player: ' + score[0] + ' Computer: ' + score[1]);
-    console.log(playerSelection);
+    const scoreResult = document.createTextNode('Player: ' + score[0] + ' Computer: ' + score[1]);
+    const linebreak = document.createElement("br");
+    divResults.appendChild(linebreak);
+    divResults.appendChild(scoreResult);
+    //console.log('Player: ' + score[0] + ' Computer: ' + score[1]); // Ex) Player: 2 Computer 3
 }
 
 function getWinningChoice(winner, player, computer) {
@@ -77,7 +85,6 @@ function checkWinner(player, computer){
         }
 }
 
-//Outputs ex) Rock beats paper!
 function getRule(winningChoice) {
     if (winningChoice === 'rock'){
         return 'Rock beats scissors!';
@@ -98,7 +105,7 @@ function logScore() { //keeps score for each round, and logs when playRoun()
 }
 
 
-//Plays 5 round game
+//Plays 5 round game, temporarily disabled while working on UI
 /*function game() {
     for (i = 0; i < 6; i++) {
         let round = playRound();
@@ -121,17 +128,16 @@ function announceWinner() {
         return 'It\'s a draw!';
     }
 }
-//playRound();
-//game();
 
-const buttons = document.querySelectorAll('.btn');
-console.log(buttons);
-
+//Buttons as playerChoice input, to replace prompt window (in progress)
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
+        divResults.textContent = '';
         let playerChoice = button.textContent.toLowerCase();
         playRound(playerChoice);
 
     })
 }
 )
+
+
