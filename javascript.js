@@ -2,6 +2,8 @@ const choices = ['rock', 'paper', 'scissors'];
 const winners = [];
 const divResults = document.querySelector('.results')
 const buttons = document.querySelectorAll('.btn');
+const modal = document.querySelector('.modal');
+
 
 
 function getComputerChoice() {
@@ -34,11 +36,13 @@ function playRound(playerSelection) {
     const winner = checkWinner(playerSelection, computerSelection);
     const winningChoice = getWinningChoice(winner, playerSelection, computerSelection);
 
-    const rule = getRule(winningChoice);
-
-    const message = getMessage(winner);
-    const roundResult = document.createTextNode(message + rule);
-    divResults.appendChild(roundResult);
+    const rule = document.createTextNode(getRule(winningChoice));
+    const message = document.createTextNode(getMessage(winner));
+    divResults.appendChild(message);
+    if (rule != '') {
+        divResults.appendChild(document.createElement("br"));
+        divResults.appendChild(rule);
+    } else {}
     // Ex) You lose! Rock beats paper!
 
     winners.push(winner);
@@ -63,9 +67,9 @@ function getWinningChoice(winner, player, computer) {
 //outputs You win, you lose, or its a draw!
 function getMessage(winner) {
     if (winner === 'player'){
-        return 'You win! ';
+        return 'You win!';
     } else if (winner === 'computer'){
-        return 'You lose! ';
+        return 'You lose!';
     } else {
         return 'It\'s a draw!';
     }}
@@ -129,12 +133,32 @@ function announceWinner() {
     }
 }
 
+let buttonClicks = 1;
 //Buttons as playerChoice input, to replace prompt window (in progress)
 buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        divResults.textContent = '';
-        let playerChoice = button.textContent.toLowerCase();
-        playRound(playerChoice);
+    button.addEventListener('click', function inputPlayer() {
+        if (buttonClicks <= 4){
+            divResults.textContent = '';
+            let playerChoice = button.textContent.toLowerCase();
+            playRound(playerChoice);
+            buttonClicks++;
+        } else if (buttonClicks === 5) {
+            divResults.textContent = '';
+            let playerChoice = button.textContent.toLowerCase();
+            playRound(playerChoice);
+            buttonClicks++;
+
+            const winner = document.createTextNode(announceWinner());
+            const linebreak = document.createElement("br");
+            //divResults.appendChild(linebreak);
+            modal.appendChild(winner);
+            modal.style.display = 'block';
+            modal.style.color = 'purple';
+            modal.style.fontSize = '20px';
+
+        } else {
+            //do nothing
+        }
 
     })
 }
