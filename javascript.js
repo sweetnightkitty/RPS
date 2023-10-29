@@ -117,10 +117,15 @@ function announceWinner() {
     }
 }
 
-let buttonClicks = 1;
+buttonClicks = 1;
 //Buttons as playerChoice input, to replace prompt window (in progress)
 buttons.forEach((button) => {
     button.addEventListener('click', function inputPlayer() {
+        const player = (logScore())[0];
+        const computer = (logScore())[1];
+        console.log(player);
+        console.log(computer);
+        console.log('start');
         if (buttonClicks <= 4){
             divResults.textContent = '';
             let playerChoice = button.textContent.toLowerCase();
@@ -141,9 +146,13 @@ buttons.forEach((button) => {
             modal.style.display = 'block';
             modal.style.color = 'purple';
             modal.style.fontSize = '20px';
+            console.log(player);
+            console.log(computer);
 
         } else {
             //do nothing
+            console.log(player);
+            console.log(computer);
         }
 
     })
