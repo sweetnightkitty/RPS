@@ -125,10 +125,10 @@ buttons.forEach((button) => {
         } else {
             //do nothing
         }
-        while (player === 5 || computer === 5) {
+        while ((player === 5) || (computer === 5)) {
             //stops the game from continuing after modal is activated
-            player++;
-            computer++;
+            player = 6;
+            computer = 6;
 
             //Final Winner Announcement message
             const winner = document.createTextNode(announceWinner());
