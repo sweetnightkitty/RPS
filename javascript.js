@@ -3,6 +3,9 @@ const winners = [];
 const divResults = document.querySelector('.results')
 const buttons = document.querySelectorAll('.btn');
 const modal = document.querySelector('.modal');
+const modalBtn = document.createElement('button');
+modalBtn.classList.add('modalbtn');
+modalBtn.textContent = 'Try Again!';
 
 
 
@@ -152,6 +155,8 @@ buttons.forEach((button) => {
             const linebreak = document.createElement("br");
             //divResults.appendChild(linebreak);
             modal.appendChild(winner);
+            modal.appendChild(linebreak);
+            modal.appendChild(modalBtn);
             modal.style.display = 'block';
             modal.style.color = 'purple';
             modal.style.fontSize = '20px';
@@ -163,5 +168,14 @@ buttons.forEach((button) => {
     })
 }
 )
+
+
+modalBtn.addEventListener('click', function restartGame() {
+    divResults.textContent = '';
+    winners.length = 0;
+    modal.innerHTML = '';
+    modal.style.display = 'none';
+    buttonClicks = 1;
+})
 
 
