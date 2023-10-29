@@ -117,55 +117,60 @@ function announceWinner() {
     }
 }
 
-buttonClicks = 1;
+//default setting for game to run on button click.
+let player = 0;
+let computer = 0;
+
 //Buttons as playerChoice input, to replace prompt window (in progress)
 buttons.forEach((button) => {
     button.addEventListener('click', function inputPlayer() {
-        const player = (logScore())[0];
-        const computer = (logScore())[1];
-        console.log(player);
-        console.log(computer);
-        console.log('start');
-        if (buttonClicks <= 4){
-            divResults.textContent = '';
-            let playerChoice = button.textContent.toLowerCase();
-            playRound(playerChoice);
-            buttonClicks++;
-        } else if (buttonClicks === 5) {
-            divResults.textContent = '';
-            let playerChoice = button.textContent.toLowerCase();
-            playRound(playerChoice);
-            buttonClicks++;
 
-            const winner = document.createTextNode(announceWinner());
-            const linebreak = document.createElement("br");
-            //divResults.appendChild(linebreak);
-            modal.appendChild(winner);
-            modal.appendChild(linebreak);
-            modal.appendChild(modalBtn);
-            modal.style.display = 'block';
-            modal.style.color = 'purple';
-            modal.style.fontSize = '20px';
-            console.log(player);
-            console.log(computer);
+        if (player < 5 && computer < 5){
+            divResults.textContent = '';
+            let playerChoice = button.textContent.toLocaleLowerCase();
+            playRound(playerChoice);
+
+            const score = logScore();
+            player = score[0];
+            computer = score[1];    
 
         } else {
             //do nothing
-            console.log(player);
-            console.log(computer);
         }
+        while (player === 5 || computer === 5) {
+            //stops the game from continuing after modal is activated
+            player++;
+            computer++;
 
+            //Final Winner Announcement message
+            const winner = document.createTextNode(announceWinner());
+
+            const linebreak = document.createElement("br");
+            
+            //Adds content to modal
+            modal.appendChild(winner); //Adds Final winner announcement to modal
+            modal.appendChild(linebreak);
+            modal.appendChild(modalBtn); //Try again Button
+
+            //Activate modal ex) you lose try again
+            modal.style.display = 'block';
+            modal.style.color = 'purple';
+            modal.style.fontSize = '20px';
+        }
     })
 }
 )
 
-
+//Try again button
 modalBtn.addEventListener('click', function restartGame() {
     divResults.textContent = '';
     winners.length = 0;
     modal.innerHTML = '';
     modal.style.display = 'none';
-    buttonClicks = 1;
+
+    //resets the game
+    player = 0;
+    computer = 0;
 })
 
 
