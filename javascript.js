@@ -13,25 +13,6 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-//Formerly provided player choice to playRound() before RPS buttons were added to HTML
-function getPlayerChoice() {
-    input = prompt('Choose rock, scissors, or paper');
-    while (input == null) {
-        prompt('Choose rock, scissors, or paper');
-    }
-    input = input.toLowerCase();
-    let check = validateInput(input);
-   while (check == false){
-        input = prompt('Must type rock, scissors, or paper with no spelling mistakes');
-        input = input.toLowerCase();
-        check = validateInput(input);
-    }
-    return input;
-}
-
-function validateInput(input) {
-    return choices.includes(input)}
-
 function playRound(playerSelection) {
     //const playerSelection = getPlayerChoice(); // Delete when the RPS buttons as input are finalized.
     const computerSelection = getComputerChoice();
