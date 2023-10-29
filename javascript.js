@@ -92,18 +92,6 @@ function logScore() { //keeps score for each round, and logs when playRoun()
     return [playerWins, computerWins];
 }
 
-
-//Plays 5 round game, temporarily disabled while working on UI
-/*function game() {
-    for (i = 0; i < 6; i++) {
-        let round = playRound();
-    } 
-    
-    let winner = announceWinner();
-    console.log(winner);
-
-}*/
-
 function announceWinner() {
     const finalScore = logScore();
     const playerFinal = finalScore[0];
