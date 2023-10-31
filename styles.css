@@ -2,12 +2,15 @@
     margin: 0;
     padding: 0;
     font-family: "PT Sans";
+    background-color: transparent;
 }
 
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-image: url(images/crumpled-paper.jpg);
+    background-repeat: no-repeat;
 }
 
 .body {
@@ -58,13 +61,13 @@ h1 {
 }
 
 button {
-    background-color: yellow;
+    background-color: none;
     border: 1px solid black;
     padding: 10px;
 }
 
 .btn, .btn-game {
-    background-color: transparent;
+    background-color: none;
     border-style: none;
 }
 
