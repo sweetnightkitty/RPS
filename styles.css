@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "PT Sans";
 }
 
 body {
@@ -18,29 +19,58 @@ body {
 
 .game {
     padding-top: 30px;
-    height: 200px;
     flex-shrink: 0;
 }
 
+.game-input {
+    gap: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
 .modal {
-    display: none;
+    display: hidden;
+    height: 50px;
+    text-align: center;
+    font-weight: 700;
 } 
 
-div {
-    border: 1px solid purple;
+.results {
+    height: 50px;
+    text-align: center;
 }
+
+
+
 h1 {
     text-align: center;
-    padding: 20px 0;
+    padding: 40px 0;
+    font-family: "Nunito";
+    font-size: 50px;
+
 }
 
 .footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 button {
-    height: 20px;
+    background-color: yellow;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.btn, .btn-game {
+    background-color: transparent;
+    border-style: none;
+}
+
+
+img {
+    height: 200px;
+    width: 200px;
+    background-color: transparent;
 }
